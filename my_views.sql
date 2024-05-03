@@ -27,4 +27,18 @@ SELECT
 FROM
     ALL_WORKERS;
     
-SELECT * FROM ALL_WORKERS_ELAPSED
+
+CREATE OR REPLACE VIEW BEST_SUPPLIERS AS
+SELECT
+    s.name AS supplier_name,
+    SUM(sb.quantity) AS total_quantity
+FROM
+    SUPPLIERS s
+INNER JOIN
+    SUPPLIERS_BRING_TO_FACTORY_1 sb ON s.supplier_id = sb.supplier_id
+GROUP BY
+    s.name
+HAVING
+    SUM(sb.quantity) > 1000
+ORDER BY
+    total_quantity DESC;
