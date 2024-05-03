@@ -16,4 +16,15 @@ FROM
     WORKERS_FACTORY_2
 ORDER BY start_date DESC;
 
-SELECT * FROM ALL_WORKERS;
+
+CREATE OR REPLACE VIEW ALL_WORKERS_ELAPSED AS
+SELECT
+    lastname,
+    firstname,
+    age,
+    start_date,
+    TRUNC(SYSDATE) - start_date AS days_elapsed
+FROM
+    ALL_WORKERS;
+    
+SELECT * FROM ALL_WORKERS_ELAPSED
