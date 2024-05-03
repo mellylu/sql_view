@@ -42,3 +42,15 @@ HAVING
     SUM(sb.quantity) > 1000
 ORDER BY
     total_quantity DESC;
+
+
+
+CREATE OR REPLACE VIEW ROBOTS_FACTORIES AS
+SELECT
+    r.id AS robot_id,
+    r.model AS robot_model,
+    rf.factory_id AS factory_id
+FROM
+    ROBOTS r
+INNER JOIN
+    ROBOTS_FROM_FACTORY rf ON r.id = rf.robot_id;
